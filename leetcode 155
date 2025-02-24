@@ -1,0 +1,94 @@
+class MinStack {
+public:
+    int val;
+    MinStack* next;
+    int min[100];
+    MinStack *Top=NULL;
+    int top1=-1;
+    MinStack() {
+       val=0;
+       next=NULL;  
+    }
+    void check(int &val)
+    {
+        if(top1==-1)
+        {
+            top1++;
+            min[top1]=val;
+        }
+        else if(val<=min[top1])
+        {
+            top1++;
+            min[top1]=val;
+        }
+        else{
+            return;
+        }
+    }
+
+    void push(int val) {
+        check(val);
+        if(Top==NULL)
+        {
+            MinStack *temp=new MinStack();
+            temp->val=val;
+            temp->next=NULL;
+            Top=temp;
+            // delete temp;
+        }
+        else{
+            MinStack *temp=new MinStack();
+            temp->val=val;
+            temp->next=Top;
+            Top=temp;
+            // delete temp;
+        }
+        
+    }
+    
+    void pop() {
+        if(Top!=NULL){
+            if(Top->val==min[top1])
+            {
+                top1--;
+                Top=Top->next;
+            }
+            else
+            {
+                Top=Top->next;
+            }
+
+        }
+    }
+    
+    int top() {
+       if(Top==NULL)
+       {
+        return -1;
+       }
+       else{
+         return Top->val;
+       }
+    }
+    
+    int getMin() {
+        if(top1>=0)
+        {
+
+            int min1= min[top1];
+            return min1;
+        }
+        // else
+        // return -1;
+        return Top->val;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
