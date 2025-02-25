@@ -9,8 +9,6 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-//not all test cases run
-//verticle order traverse
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
@@ -65,6 +63,7 @@ public:
             }
         }
         vector<int>temp1;
+        int stat=0;
         for(auto i : maps)
         {
             for(auto j : i.second)
@@ -73,10 +72,16 @@ public:
                 {
                     temp1.push_back(k);
                 }
+                if(temp1.size()>0)
+                {
+                    sort(temp1.begin()+stat, temp1.end());
+                    stat=temp1.size();
+
+                }
             }
-                // sort(temp1.begin(), temp1.end());
-                ans.push_back(temp1);
+            ans.push_back(temp1);
             temp1.clear();
+            stat=0;
         }
         return ans;
     }
