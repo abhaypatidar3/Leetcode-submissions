@@ -1,0 +1,69 @@
+class MyStack {
+public:
+    int data;
+    MyStack* next;
+    MyStack* head=NULL;
+    MyStack() {
+        this->data=0;
+        this->next=NULL;
+    }
+    
+    void push(int x) {
+        if(head==NULL){
+        MyStack* temp= new MyStack();
+        temp->data=x;
+        head=temp;
+        }
+        else{
+            MyStack* temp= new MyStack();
+            temp->next=head;
+            temp->data=x;
+            head=temp;
+        }
+
+
+    }
+    
+    int pop() {
+        if(head==NULL)
+        {
+            return -1;
+        }
+        else
+        {
+            int val= top();
+            head=head->next;
+            return val;
+        }
+        
+    }
+    
+    int top() {
+        if(head==NULL)
+        {
+            return -1;
+        }
+        else
+        return head->data;
+        
+    }
+    
+    bool empty() {
+        if(head==NULL)
+        {
+            return 1;
+        }
+        else
+        return 0;
+        
+    }
+};
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack* obj = new MyStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->top();
+ * bool param_4 = obj->empty();
+ */
