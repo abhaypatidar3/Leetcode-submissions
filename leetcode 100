@@ -1,0 +1,69 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p==NULL && q==NULL)
+        {
+            return true;
+        }
+        if(p==NULL && (q!=NULL) || (p!=NULL)&&(q==NULL))
+        {
+            return false;
+        }
+        if((p->val)!=(q->val))
+        {
+            return false;
+        }
+        else
+        {
+            bool left,right;
+            if(p->left!=NULL && q->left!=NULL)
+            {
+                left=isSameTree(p->left, q->left);
+            }
+            else if((p->left==NULL) && (q->left==NULL))
+            {
+                left = true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+            //right
+            if(p->right && q->right)
+            {
+                right=isSameTree(p->right, q->right);
+            }
+            else if((p->right==NULL) && (q->right==NULL))
+            {
+                right = true;
+            }
+            else
+            {
+                return false;
+            }
+
+            if(left && right)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+};
