@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+
+    int find_pos(int element, map<int,int>&maps)
+    {
+        return maps[element];
+    }
+
+    TreeNode *solve(vector<int>&pre, vector<int>&in, int &index,int in_start, int in_end,map<int,int>&maps)
+    {
+        if(in_start>in_end || index>=in.size())
+        {
+            return NULL;
+        }
+        int element = pre[index++];
+        TreeNode* root = new TreeNode(element);
+        int position = find_pos(element,maps);
+
+        //left right call
+        root->left=solve(pre,in,index,in_start,position-1,maps); 
+        root->right=solve(pre,in,index,position+1,in_end,maps); 
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int preindex=0;
+        map<int,int>maps;
+        for(int i=0;i<inorder.size();i++)
+        {
+            maps[inorder[i]]=i;
+        }
+        TreeNode* ans=solve(preorder,inorder,preindex,0,inorder.size()-1,maps);
+        return ans;
+    }
+};
