@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> transformArray(vector<int>& nums) {
+        int onecount=0;
+        int zerocount=0;
+        // nums[2]=5;
+        for(int i=0; i<nums.size(); i++)
+        {
+            if(nums[i]%2)
+            {
+                onecount++;
+            }
+            else
+            {
+                zerocount++;
+            }
+        }
+        int i=0;
+        while(zerocount>0)
+        {
+            nums[i++]=0;
+            zerocount--;
+        }
+        while(onecount>0)
+        {
+            nums[i++]=1;
+            onecount--;
+        }
+        return nums;
+    }
+};
