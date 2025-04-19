@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int indexy(int key, vector<int>&prices)
+    {
+        int i=0;
+        while(true)
+        {
+            if(key==prices[i])
+            {
+                return i;
+                break;
+            }
+            i++;
+        }
+    }
+    int find(int start,vector<int>&sorted, vector<int>&prices){
+        int index1 = indexy(sorted[start],prices);
+        int j=sorted.size()-1;
+        int index2 = indexy(sorted[j],prices);
+        while(index1>index2)
+        {
+            j--;
+            int index2 = indexy(sorted[j],prices);
+        }
+        return prices[index1]-prices[index2];
+
+    }
+
+    int maxProfit(vector<int>& prices) {
+        vector<int>sorted=prices;
+        sort(sorted.begin(),sorted.end());
+        int profit=find(0,sorted,prices);
+        return profit;
+    }
+};
