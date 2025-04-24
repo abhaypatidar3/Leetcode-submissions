@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxContainers(int n, int w, int maxWeight) {
+        int i=1;
+        for(i=1;i<=(n*n);i++)
+        {
+            if(w*i>maxWeight)
+           {
+               return --i;
+           }
+            
+        }
+        return --i;
+    }
+};
