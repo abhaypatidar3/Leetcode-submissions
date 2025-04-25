@@ -1,0 +1,37 @@
+class Solution {
+public:
+    long long int Ncr(int N,int r)
+    {
+        long long int num=1;
+        long long int denum=r;
+        for(int i=1;i<=r;i++)
+        {
+            num=num*(N);
+            if(N%denum==0)
+            {
+                num=num/(denum--);
+            }
+            N--;
+        }
+        while(denum>1)
+        {
+            num=num/(denum--);
+        }
+        return num;
+
+    }
+    int uniquePaths(int m, int n) {
+        int N = m+n-2;
+        int r;
+        if(m>n)
+        {
+            r = n-1;
+        }
+        else
+        {
+            r = m-1;
+        }
+        int ans = Ncr(N,r);
+        return ans;
+    }
+};
