@@ -1,0 +1,99 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int length(ListNode* head)
+    {
+        int count=0;
+        while(head!=NULL)
+        {
+            count++;
+            head=head->next;
+        }
+        return count;
+    }
+    ListNode* reverse(ListNode* &prev)
+    {
+        ListNode* ret = prev;
+        ListNode* bitnode = prev->next;
+        ListNode* curr = prev->next;
+        if(curr->next==NULL){
+            return curr;
+        }
+        ListNode* Next = curr->next;
+        while(Next!=NULL)
+        {
+            curr->next=prev;
+            prev=curr;
+            curr=Next;
+            Next=Next->next;
+        }
+        ret->next=curr;
+        bitnode->next=NULL;
+        curr->next=prev;
+        return curr;
+    }
+    bool isPalindrome(ListNode* head) {
+        int len = length(head);
+        if(len==1)
+        {
+            return true;
+        }
+        ListNode* temp=head;
+        if(len%2==0)
+        {
+            for(int i=0;i<(len/2)-1;i++)
+            {
+                temp=temp->next;
+               
+            }
+            // if(temp->val==1)
+            // {
+            //     return false;
+            // }
+            ListNode* compare = reverse(temp);
+            // if(compare->val==1)
+            // {
+            //     return true;
+            // }
+            while(compare!=NULL)
+            {
+                if(head->val!=compare->val)
+                {
+                    return false;
+                }
+                head=head->next;
+                compare=compare->next;
+            }
+            
+            return true;
+        }
+        else
+        {
+            // return true;
+            for(int i=0;i<=(len/2)-1;i++)
+            {
+                temp=temp->next;
+            }
+            ListNode* compare = reverse(temp);
+            while(compare!=NULL)
+            {
+                if(head->val!=compare->val)
+                {
+                    return false;
+                }
+                head=head->next;
+                compare=compare->next;
+            }
+            return true;
+        }
+    }
+};
