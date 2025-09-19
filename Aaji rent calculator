@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main() {
+    cout<<"enter rent ";
+    int rent;
+    cin>>rent;
+    cout<<"enter percent increase after 11 months ";
+    int percent;
+    cin>>percent;
+    cout<<"enter duration in years ";
+    int years;
+    cin>>years;
+    int total=0;
+    int months = years*12;
+    for(int i=1;i<=months;i++){
+        if(i!=1 && (i%11)==1){
+            rent += (rent/100)*percent;
+        }
+        total += rent;
+    }
+    cout<<"total rent is "<<total;
+    return 0;
+}
